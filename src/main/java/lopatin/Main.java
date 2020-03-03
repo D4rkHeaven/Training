@@ -2,6 +2,6 @@ package lopatin;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello epam!");
+        System.out.println("Hello lesson2!");
     }
 }

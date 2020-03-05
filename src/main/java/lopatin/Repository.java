@@ -16,7 +16,7 @@ public class Repository<T extends Human> {
     }
 
     // Генерация одного человека
-     Human get(Human human) {
+     public Human get(Human human) {
         Human.Address address = new Human().new Address();
         human.setID((int) (Math.random() * 10));
         human.setName(stringGen());
@@ -28,23 +28,22 @@ public class Repository<T extends Human> {
     }
 
     // Генерация i-го количества людей
-     List<Human> getAll(int i) {
-        Repository rep = new Repository();
+     public List<Human> getAll(int i) {
         ArrayList<Human> list = new ArrayList<>();
         for (int j = 0; j < i; j++) {
             Human human = new Human();
-            list.add(rep.get(human));
+            list.add(get(human));
         }
         return list;
     }
 
     // Сохранение записи в БД
-     void save(Human human) {
+     public void save(Human human) {
         System.out.println(human);
     }
 
     // Сохранение всех людей в БД
-     void saveAll(List<Human> humans) {
+    public void saveAll(List<Human> humans) {
         for (Human go : humans) {
             System.out.println(go);
         }

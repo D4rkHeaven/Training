@@ -15,7 +15,7 @@ public class Converter {
         return address;
     }
 
-    Human ConvertToHuman(HumanDTO dto) {
+    public Human ConvertToHuman(HumanDTO dto) {
         Human human = new Human();
         human.setID(dto.getID());
         human.setName(dto.getName());
@@ -24,7 +24,7 @@ public class Converter {
         return human;
     }
 
-    HumanDTO ConvertToDTO(Human human) {
+    public HumanDTO ConvertToDTO(Human human) {
         HumanDTO dto = new HumanDTO();
         dto.setID(human.getID());
         dto.setName(human.getName());

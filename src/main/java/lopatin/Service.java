@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Service<T extends HumanDTO> {
+public class Service<T extends Human> {
     /* Костыль для генерации случайных строк */
-    private String stringGen() {
+     private String stringGen() {
         String string = "randomletters";
         StringBuilder randString = new StringBuilder();
         int count = (int) (Math.random() * 8 + 2);
@@ -16,37 +16,37 @@ public class Service<T extends HumanDTO> {
     }
 
     // Генерация одного человека
-     HumanDTO get(HumanDTO dto) {
-        HumanDTO.Address address = new HumanDTO().new Address();
-        dto.setID((int) (Math.random() * 10));
-        dto.setName(stringGen());
-        dto.setBirthDate(new Date((long) (Math.random() * 100000)));
+    Human get(Human human) {
+        Human.Address address = new Human(). new Address();
+        human.setID((int) (Math.random() * 10));
+        human.setName(stringGen());
+        human.setBirthDate(new Date((long) (Math.random() * 100000000)));
         address.setCity(stringGen());
         address.setStreet(stringGen());
-        dto.setAddress(address);
-        return dto;
+        human.setAddress(address);
+        return human;
     }
 
     // Генерация i-го количества людей
-     List<HumanDTO> getAll(int i) {
-         Service service = new Service<>();
-        ArrayList<HumanDTO> list = new ArrayList<>();
+     List<Human> getAll(int i) {
+         Service service = new Service();
+        List<Human> list = new ArrayList<>();
         for (int j = 0; j < i; j++) {
-            HumanDTO dto = new HumanDTO();
-            list.add(service.get(dto));
+            Human human = new Human();
+            list.add(service.get(human));
         }
         return list;
     }
 
-    // Вывод инфы об одном dto
-     void save(HumanDTO dto) {
-        System.out.println(dto);
+    // Вывод инфы об одном человеке
+     void save(Human human) {
+        System.out.println(human);
     }
 
-    // Вывод инфы о всех dto
-     void saveAll(List<HumanDTO> dtos) {
-        for (HumanDTO go : dtos) {
-            System.out.println(go);
+    // Вывод инфы о всех человеках
+     void saveAll(List<Human> persons) {
+        for (Human human : persons) {
+            System.out.println(human);
         }
     }
 }

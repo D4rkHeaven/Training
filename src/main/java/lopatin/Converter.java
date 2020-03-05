@@ -1,6 +1,6 @@
 package lopatin;
 
-public class Converter<T extends Human> {
+public class Converter {
      private Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
         Human.Address address = new Human().new Address();
         address.setStreet(dtoAd.getStreet());

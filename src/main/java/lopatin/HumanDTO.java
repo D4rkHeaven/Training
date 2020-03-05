@@ -16,7 +16,7 @@ public class HumanDTO {
     private Date birthDate;
 
     @Data
-    static class Address {
+    class Address {
         private String city;
         private String street;
     }

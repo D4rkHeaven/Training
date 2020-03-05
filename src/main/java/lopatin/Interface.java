@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public interface Interface<T extends Human> {
+public class Interface<T extends Human> {
     /* Костыль для генерации случайных строк */
-    static String stringGen() {
+     private String stringGen() {
         String string = "randomletters";
         StringBuilder randString = new StringBuilder();
         int count = (int) (Math.random() * 8 + 2);
@@ -16,8 +16,8 @@ public interface Interface<T extends Human> {
     }
 
     // Генерация одного человека
-    static Human get(Human human) {
-        Human.Address address = new Human.Address();
+    Human get(Human human) {
+        Human.Address address = new Human(). new Address();
         human.setID((int) (Math.random() * 10));
         human.setName(stringGen());
         human.setBirthDate(new Date((long) (Math.random() * 100000000)));
@@ -28,22 +28,23 @@ public interface Interface<T extends Human> {
     }
 
     // Генерация i-го количества людей
-    static List<Human> getAll(int i) {
+     List<Human> getAll(int i) {
+         Interface inter = new Interface<>();
         List<Human> list = new ArrayList<>();
         for (int j = 0; j < i; j++) {
             Human human = new Human();
-            list.add(Interface.get(human));
+            list.add(inter.get(human));
         }
         return list;
     }
 
     // Вывод инфы об одном человеке
-    static void save(Human human) {
+     void save(Human human) {
         System.out.println(human);
     }
 
     // Вывод инфы о всех человеках
-    static void saveAll(List<Human> persons) {
+     void saveAll(List<Human> persons) {
         for (Human human : persons) {
             System.out.println(human);
         }

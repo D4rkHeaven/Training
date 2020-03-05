@@ -1,21 +1,21 @@
 package lopatin;
 
-public interface Converter<T> {
-    static Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
-        Human.Address address = new Human.Address();
+public class Converter<T extends Human> {
+     private Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
+        Human.Address address = new Human().new Address();
         address.setStreet(dtoAd.getStreet());
         address.setCity(dtoAd.getCity());
         return address;
     }
 
-    static HumanDTO.Address ConvertAddressToDTO(Human.Address ad) {
-        HumanDTO.Address address = new HumanDTO.Address();
+    private HumanDTO.Address ConvertAddressToDTO(Human.Address ad) {
+        HumanDTO.Address address = new HumanDTO().new Address();
         address.setStreet(ad.getStreet());
         address.setCity(ad.getCity());
         return address;
     }
 
-    static Human ConvertToHuman(HumanDTO dto) {
+    Human ConvertToHuman(HumanDTO dto) {
         Human human = new Human();
         human.setID(dto.getID());
         human.setName(dto.getName());
@@ -24,7 +24,7 @@ public interface Converter<T> {
         return human;
     }
 
-    static HumanDTO ConvertToDTO(Human human) {
+    HumanDTO ConvertToDTO(Human human) {
         HumanDTO dto = new HumanDTO();
         dto.setID(human.getID());
         dto.setName(human.getName());

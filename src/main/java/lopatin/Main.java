@@ -4,31 +4,33 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
         System.out.println("Проверка интерфейса");
         Human human = new Human();
-        Interface.get(human);
-        Interface.save(human);
-        List<Human> persons = Interface.getAll(3);
-        Interface.saveAll(persons);
+        Interface inter = new Interface<>();
+        Service service = new Service<>();
+        Converter converter = new Converter<>();
+        inter.get(human);
+        inter.save(human);
+        List<Human> persons = inter.getAll(3);
+        inter.saveAll(persons);
 
 
         System.out.println("Проверка сервиса");
         HumanDTO dto = new HumanDTO();
-        Service.get(dto);
-        Service.save(dto);
-        List<HumanDTO> dtos = Service.getAll(3);
-        Service.saveAll(dtos);
+        service.get(dto);
+        service.save(dto);
+        List<HumanDTO> dtos = service.getAll(3);
+        service.saveAll(dtos);
 
         // перевод из сущности в дто
         System.out.println("Проверка конвертера");
-        dto = Converter.ConvertToDTO(human);
-        Interface.save(human);
-        Service.save(dto);
+        dto = converter.ConvertToDTO(human);
+        inter.save(human);
+        service.save(dto);
         // перевод из дто в сущность
-        Service.get(dto);
-        human = Converter.ConvertToHuman(dto);
-        Service.save(dto);
-        Interface.save(human);
+        service.get(dto);
+        human = converter.ConvertToHuman(dto);
+        service.save(dto);
+        inter.save(human);
     }
 }

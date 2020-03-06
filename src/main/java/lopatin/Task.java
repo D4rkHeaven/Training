@@ -131,14 +131,22 @@ public class Task {
     }
     public void runTask9(HashMap<Integer,String> map){
         Map<Integer, String> treeMap = new TreeMap<>(map);
+        System.out.println("Множество, отсортированное по ключам");
         System.out.println(treeMap);
     }
     public void runTask10(HashMap<Integer,String> map){
         TreeSet< String> treeMap = new TreeSet<>(map.values());
+        System.out.println("Множество, отсортированное по значениям");
         System.out.println(treeMap);
     }
     public void runTask11(){
         LinkedList linkedList = new LinkedList();
-        System.out.println(linkedList);
+        for (int i = 0; i < 10; i++) {
+            linkedList.add((int)(Math.random()*100));
+        }
+        System.out.println("Содержимое двусвязного списка");
+        for (int i = 0; i < linkedList.size(); i++) {
+            System.out.println(" Значение "+linkedList.get(i)+" c индексом "+(i+1));
+        }
     }
 }

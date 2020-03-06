@@ -2,13 +2,13 @@ package lopatin;
 
 import java.util.*;
 
-public class Tasks {
+public class Task {
     private void print(List<Human> humanList){
         for (int i = 0; i < humanList.size(); i++) {
             System.out.println((i+1)+ " " + humanList.get(i));
         }
     }
-    public List<Human> runTask1(){
+    public List<Human> getList(){
         Human.Address address1 = new Human().new Address("Москва","Ленина",12,1);
         Human human1 = new Human("Пупкин Г.Д.",12,address1);
         Human.Address address2 = new Human().new Address("Москва","Ленина",12,1);
@@ -40,9 +40,36 @@ public class Tasks {
         humanList.add(human8);
         humanList.add(human9);
         humanList.add(human10);
+        return humanList;
+    }
+    public List<User> getUsers(){
+        User user1=new User("Акопян Владислав", User.Role.ADMIN);
+        User user2=new User("Игнаточкин Андрей", User.Role.USER);
+        User user3=new User("Ситников Олег", User.Role.MODERATOR);
+        List<User> users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        return users;
+    }
+    public HashMap<Integer,String> getMap(){
+        HashMap<Integer,String> map=new HashMap<>();
+        map.put(1,"one");
+        map.put(5,"two");
+        map.put(12,"three");
+        map.put(33,"four");
+        map.put(3,"five");
+        map.put(92,"six");
+        map.put(84,"seven");
+        map.put(11,"eight");
+        map.put(37,"nine");
+        map.put(74,"ten");
+        return map;
+    }
+
+    public void runTask1(List<Human> humanList){
         System.out.println("Исходная коллекция:");
         print(humanList);
-        return humanList;
     }
 
     public void runTask2(List<Human> humanList) {
@@ -59,6 +86,9 @@ public class Tasks {
     }
     public void runTask3(List<Human> humanList){
         Map<Human, Integer> mapHuman = new HashMap<>();
+        for (Human human : humanList) {
+            mapHuman.put(human,mapHuman.get(human)==null?1:mapHuman.get(human)+1);
+        }
         for (Map.Entry<Human, Integer> entry : mapHuman.entrySet()) {
             if (entry.getValue()>1) {
                 Human h = entry.getKey();
@@ -81,14 +111,34 @@ public class Tasks {
         print(humanList);
     }
     public void runTask6(List<Human> humanList){
-        Comparator<Human> compareByAddress = new Comparator<Human>() {
-            @Override
-            public int compare(Human o1, Human o2) {
-                return o1.getAddress().compareTo(o2.getAddress());
-            }
-        };
+        Comparator<Human> compareByAddress = (o1, o2) -> o1.getAddress().compareTo(o2.getAddress());
         humanList.sort(compareByAddress);
         System.out.println("Коллекция, отсортированная по адресу:");
         print(humanList);
+    }
+    public void runTask7(List<User> users){
+        System.out.println("Список пользователей: ");
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println((i+1)+ " " + users.get(i));
+        }
+    }
+    public void runTask8(List<User> users){
+        System.out.println("Приветствуем пользователей: ");
+        for (User value : users) {
+            User user = new User();
+            user.greeting(value);
+        }
+    }
+    public void runTask9(HashMap<Integer,String> map){
+        Map<Integer, String> treeMap = new TreeMap<>(map);
+        System.out.println(treeMap);
+    }
+    public void runTask10(HashMap<Integer,String> map){
+        TreeSet< String> treeMap = new TreeSet<>(map.values());
+        System.out.println(treeMap);
+    }
+    public void runTask11(){
+        LinkedList linkedList = new LinkedList();
+        System.out.println(linkedList);
     }
 }

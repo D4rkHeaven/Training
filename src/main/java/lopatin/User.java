@@ -10,9 +10,4 @@ import lombok.NoArgsConstructor;
 public class User {
     private String fio;
     private Role role;
-    enum Role{
-        ADMIN,
-        USER,
-        MODERATOR
-    }
 }

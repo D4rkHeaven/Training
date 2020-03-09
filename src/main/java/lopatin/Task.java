@@ -43,9 +43,9 @@ public class Task {
         return humanList;
     }
     public List<User> getUsers(){
-        User user1=new User("Акопян Владислав", User.Role.ADMIN);
-        User user2=new User("Игнаточкин Андрей", User.Role.USER);
-        User user3=new User("Ситников Олег", User.Role.MODERATOR);
+        User user1=new User("Акопян Владислав", Role.ADMIN);
+        User user2=new User("Игнаточкин Андрей", Role.USER);
+        User user3=new User("Ситников Олег", Role.MODERATOR);
         List<User> users = new ArrayList<>();
         users.add(user1);
         users.add(user2);
@@ -123,11 +123,11 @@ public class Task {
         }
     }
     public void greetUsers(List<User> users){
-        Map<String, User.Role> hashmap = new HashMap<>() ;
+        Map<String, Role> hashmap = new HashMap<>() ;
         System.out.println("Приветствуем пользователей: ");
         for (int i = 0; i<users.size(); i++) {
             String key=users.get(i).getFio();
-            User.Role role=users.get(i).getRole();
+            Role role=users.get(i).getRole();
             hashmap.put(key,role);
             System.out.println("Приветствуем " + users.get(i).getFio() + " с ролью " + hashmap.get(key));
         }

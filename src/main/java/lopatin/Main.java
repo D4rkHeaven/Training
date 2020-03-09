@@ -1,6 +1,7 @@
 package lopatin;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,37 +10,51 @@ public class Main {
         Task task = new Task();
         List<Human> humanList = task.getList();
         List<User> users = task.getUsers();
-        HashMap<Integer,String> hashmap=task.getMap();
+        HashMap<Integer, String> hashmap = task.getMap();
         Scanner in = new Scanner(System.in);
-
-        System.out.print("Введите номер задания (от 1 до 11): ");
-        int number = in.nextInt();
-        switch (number) {
-            case 1: task.runTask1(humanList);
-                break;
-            case 2: task.runTask2(humanList);
-                break;
-            case 3: task.runTask3(humanList);
-                break;
-            case 4: task.runTask4(humanList);
-                break;
-            case 5: task.runTask5(humanList);
-                break;
-            case 6:  task.runTask6(humanList);
-                break;
-            case 7: task.runTask7(users);
-                break;
-            case 8: task.runTask8(users);
-                break;
-            case 9: task.runTask9(hashmap);
-                break;
-            case 10: task.runTask10(hashmap);
-                break;
-            case 11: task.runTask11();
-                break;
-            default:
-                System.out.println("Неправильный номер задания.");
-                break;
+        try {
+            System.out.print("Введите номер задания (от 1 до 11): ");
+            int number = in.nextInt();
+            switch (number) {
+                case 1:
+                    task.fillArrayList(humanList);
+                    break;
+                case 2:
+                    task.findDoubles(humanList);
+                    break;
+                case 3:
+                    task.deleteDoubles(humanList);
+                    break;
+                case 4:
+                    task.sortByFio(humanList);
+                    break;
+                case 5:
+                    task.sortByAge(humanList);
+                    break;
+                case 6:
+                    task.sortByAddress(humanList);
+                    break;
+                case 7:
+                    task.createUsers(users);
+                    break;
+                case 8:
+                    task.greetUsers(users);
+                    break;
+                case 9:
+                    task.sortHashMapByKey(hashmap);
+                    break;
+                case 10:
+                    task.sortHashMapByValue(hashmap);
+                    break;
+                case 11:
+                    task.fillLinkedList();
+                    break;
+                default:
+                    System.out.println("Неправильный номер задания.");
+                    break;
+            }
+        } catch (InputMismatchException e) {
+            System.out.print("Введите число, являющееся номером задания!");
         }
     }
 }

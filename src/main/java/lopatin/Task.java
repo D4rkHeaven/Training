@@ -67,12 +67,12 @@ public class Task {
         return map;
     }
 
-    public void runTask1(List<Human> humanList){
+    public void fillArrayList(List<Human> humanList){
         System.out.println("Исходная коллекция:");
         print(humanList);
     }
 
-    public void runTask2(List<Human> humanList) {
+    public void findDoubles(List<Human> humanList) {
         Map<Human, Integer> mapHuman = new HashMap<>();
         for (Human human : humanList) {
             mapHuman.put(human,mapHuman.get(human)==null?1:mapHuman.get(human)+1);
@@ -84,7 +84,7 @@ public class Task {
             }
         }
     }
-    public void runTask3(List<Human> humanList){
+    public void deleteDoubles(List<Human> humanList){
         Map<Human, Integer> mapHuman = new HashMap<>();
         for (Human human : humanList) {
             mapHuman.put(human,mapHuman.get(human)==null?1:mapHuman.get(human)+1);
@@ -98,48 +98,48 @@ public class Task {
         System.out.println("Коллекция без дублей:");
         print(humanList);
     }
-    public void runTask4(List<Human> humanList){
+    public void sortByFio(List<Human> humanList){
         Comparator<Human> compareByFio = Comparator.comparing(Human::getFio);
         humanList.sort(compareByFio);
         System.out.println("Коллекция, отсортированная по ФИО:");
         print(humanList);
     }
-    public void runTask5(List<Human> humanList){
+    public void sortByAge(List<Human> humanList){
         Comparator<Human> compareByAge = Comparator.comparing(Human::getAge);
         humanList.sort(compareByAge);
         System.out.println("Коллекция, отсортированная по возрасту:");
         print(humanList);
     }
-    public void runTask6(List<Human> humanList){
+    public void sortByAddress(List<Human> humanList){
         Comparator<Human> compareByAddress = (o1, o2) -> o1.getAddress().compareTo(o2.getAddress());
         humanList.sort(compareByAddress);
         System.out.println("Коллекция, отсортированная по адресу:");
         print(humanList);
     }
-    public void runTask7(List<User> users){
+    public void createUsers(List<User> users){
         System.out.println("Список пользователей: ");
         for (int i = 0; i < users.size(); i++) {
             System.out.println((i+1)+ " " + users.get(i));
         }
     }
-    public void runTask8(List<User> users){
+    public void greetUsers(List<User> users){
         System.out.println("Приветствуем пользователей: ");
         for (User value : users) {
             User user = new User();
             user.greeting(value);
         }
     }
-    public void runTask9(HashMap<Integer,String> map){
+    public void sortHashMapByKey(HashMap<Integer,String> map){
         Map<Integer, String> treeMap = new TreeMap<>(map);
         System.out.println("Множество, отсортированное по ключам");
         System.out.println(treeMap);
     }
-    public void runTask10(HashMap<Integer,String> map){
+    public void sortHashMapByValue(HashMap<Integer,String> map){
         TreeSet< String> treeMap = new TreeSet<>(map.values());
         System.out.println("Множество, отсортированное по значениям");
         System.out.println(treeMap);
     }
-    public void runTask11(){
+    public void fillLinkedList(){
         LinkedList linkedList = new LinkedList();
         for (int i = 0; i < 10; i++) {
             linkedList.add((int)(Math.random()*100));

@@ -15,7 +15,4 @@ public class User {
         USER,
         MODERATOR
     }
-    public void greeting(User user){
-        System.out.println("Приветствуем " +user.getFio() + " с ролью " + user.getRole());
-    }
 }

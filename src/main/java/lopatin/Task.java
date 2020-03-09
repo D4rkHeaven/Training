@@ -123,10 +123,13 @@ public class Task {
         }
     }
     public void greetUsers(List<User> users){
+        Map<String, User.Role> hashmap = new HashMap<>() ;
         System.out.println("Приветствуем пользователей: ");
-        for (User value : users) {
-            User user = new User();
-            user.greeting(value);
+        for (int i = 0; i<users.size(); i++) {
+            String key=users.get(i).getFio();
+            User.Role role=users.get(i).getRole();
+            hashmap.put(key,role);
+            System.out.println("Приветствуем " + users.get(i).getFio() + " с ролью " + hashmap.get(key));
         }
     }
     public void sortHashMapByKey(HashMap<Integer,String> map){

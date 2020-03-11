@@ -1,10 +1,13 @@
 package lopatin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
-
+    private Logger fileLogger = LoggerFactory.getLogger(Service.class);
     // Получение сущности из БД через ДТО
     public HumanDTO get(HumanDTO dto) {
         Converter converter = new Converter();
@@ -12,6 +15,7 @@ public class Service {
         Human human= converter.ConvertToHuman(dto);
         repository.get(human);
         dto = converter.ConvertToDTO(human);
+        fileLogger.info("Сущность с id = {} получена из БД", dto.getID());
         return dto;
     }
 
@@ -30,6 +34,7 @@ public class Service {
         Converter converter = new Converter();
         Repository repository = new Repository();
         Human human=converter.ConvertToHuman(dto);
+        fileLogger.info("Сущность с id = {} сохранена в БД", dto.getID());
         repository.save(human);
     }
 

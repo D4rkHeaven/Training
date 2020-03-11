@@ -1,50 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <configuration>
+    <!-- Вывод в консоль -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    
+    <!-- Вывод в файл и на консоль -->
+    <appender name="fileAndConsole"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>c:/logs/info.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+            </Pattern>
+        </encoder>
 
-    <property name="DEV_HOME" value="c:\Users\Дима\Desktop\учёба\Training\src\main\resources" />
-
-    <appender name="FILE-THREAD" class="ch.qos.logback.classic.sift.SiftingAppender">
-
-        <discriminator>
-            <key>logFileName</key>
-            <defaultValue>head0</defaultValue>
-        </discriminator>
-
-        <sift>
-
-            <appender name="FILE-${logFileName}"
-                      class="ch.qos.logback.core.rolling.RollingFileAppender">
-                <file>${DEV_HOME}/${logFileName}.log</file>
-                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-                    <Pattern>
-                        %d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger{35} - %msg%n
-                    </Pattern>
-                </encoder>
-
-                <rollingPolicy
-                        class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-                    <FileNamePattern>${DEV_HOME}/${logFileName}.%i.log.zip</FileNamePattern>
-                    <MinIndex>1</MinIndex>
-                    <MaxIndex>10</MaxIndex>
-                </rollingPolicy>
-
-                <triggeringPolicy
-                        class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-                    <MaxFileSize>10MB</MaxFileSize>
-                </triggeringPolicy>
-
-            </appender>
-
-        </sift>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>c:/logs/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
 
     </appender>
 
-    <logger name="com.mkyong.web" level="debug"
-            additivity="false">
-        <appender-ref ref="FILE-THREAD" />
+    <!-- Вывод в файл -->
+    <appender name="file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>c:/logs/info_file.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+            </Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>c:/log/info_file.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+    </appender>
+
+    <logger name="lopatin.Repository" level="info" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileAndConsole"/>
     </logger>
 
-    <root level="error">
-        <appender-ref ref="FILE-THREAD" />
+    <logger name="lopatin.Service" level="info" additivity="false">
+        <appender-ref ref="file"/>
+    </logger>
+    
+    <logger name="lopatin.Converter" level="info" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="file"/>
     </root>
 
 </configuration>

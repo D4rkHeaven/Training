@@ -1,7 +1,12 @@
 package lopatin;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Converter {
-     private Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
+    private Logger consoleLogger = LoggerFactory.getLogger(Converter.class);
+    private Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
+
         Human.Address address = new Human().new Address();
         address.setStreet(dtoAd.getStreet());
         address.setCity(dtoAd.getCity());
@@ -21,6 +26,7 @@ public class Converter {
         human.setName(dto.getName());
         human.setBirthDate(dto.getBirthDate());
         human.setAddress(ConvertAddressToHuman(dto.getAddress()));
+        consoleLogger.info("DTO с id = {} конвертирована в сущность", dto.getID());
         return human;
     }
 
@@ -30,6 +36,7 @@ public class Converter {
         dto.setName(human.getName());
         dto.setBirthDate(human.getBirthDate());
         dto.setAddress(ConvertAddressToDTO(human.getAddress()));
+        consoleLogger.info("Человек с id = {} конвертирован в dto", human.getID());
         return dto;
     }
 }

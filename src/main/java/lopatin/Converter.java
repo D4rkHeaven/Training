@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 public class Converter {
     private Logger consoleLogger = LoggerFactory.getLogger(Converter.class);
     private Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
-
         Human.Address address = new Human().new Address();
         address.setStreet(dtoAd.getStreet());
         address.setCity(dtoAd.getCity());

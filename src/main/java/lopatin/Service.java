@@ -24,17 +24,19 @@ public class Service {
     }
 
     // Получение списка сущностей из БД через DTO
-    public List<HumanDTO> getAll(int i) throws EntityNotFound {
+    public List<HumanDTO> getAll(int i) {
         List<HumanDTO> list = new ArrayList<>();
-        for (int j = 0; j < i; j++) {
-            HumanDTO dto = new HumanDTO();
-            dto=get(dto);
-            if(dto.getID()>HIGHEST_ALLOWED_ID){
-                fileLogger.warn("Человек с id = {} не найден", dto.getID());
-                throw new EntityNotFound("Человек с id"+ dto.getID()+" не найден");
+        try {
+            List<Human> humans = repository.getAll(i);
+            for (int j = 0; j < i; j++) {
+                Human human =humans.get(j);
+                HumanDTO dto = converter.ConvertToDTO(human);
+                list.add(dto);
             }
-            list.add(dto);
+        } catch (EntityNotFound e){
+            fileLogger.warn("Exception: ",e);
         }
+
         return list;
     }
 

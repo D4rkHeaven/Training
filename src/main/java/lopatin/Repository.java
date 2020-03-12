@@ -40,7 +40,7 @@ public class Repository<T extends Human> {
     }
 
     // Генерация i-го количества людей
-    public List<Human> getAll(int i) {
+    public List<Human> getAll(int i) throws EntityNotFound {
         ArrayList<Human> list = new ArrayList<>();
         for (int j = 0; j < i; j++) {
            try {
@@ -48,6 +48,7 @@ public class Repository<T extends Human> {
                list.add(get(human));
            }catch (EntityNotFound e){
                fileAndConsoleLogger.warn("Невозможно получить список людей");
+               throw new EntityNotFound("Невозможно получить список людей");
            }
         }
         return list;

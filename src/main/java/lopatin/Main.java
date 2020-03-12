@@ -3,7 +3,7 @@ package lopatin;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws EntityNotFound {
+    public static void main(String[] args) {
         System.out.println("Проверка сервиса");
         Service service = new Service();
         HumanDTO dto = new HumanDTO();

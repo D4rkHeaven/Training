@@ -1,5 +1,7 @@
 package lopatin.handler;
 
+import lopatin.util.InvalidCommandException;
+
 public interface CommandHandler {
-    String handler(String command);
+    void handle(String command) throws InvalidCommandException;
 }

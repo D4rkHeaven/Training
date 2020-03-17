@@ -13,7 +13,7 @@ public class Delete implements CommandHandler {
     Pattern pattern;
     @Override
     public void handle(String command) throws InvalidCommandException {
-        pattern = Pattern.compile("^(delete) *[\\d]{0,3} *([\\w]+[\\w.]*)$");
+        pattern = Pattern.compile("[Dd]elete *[\\d]{0,3} *[\\w]+.txt");
         if (!pattern.matcher(command).matches()) {
             log.error("Команда delete введена неверно");
             throw new InvalidCommandException("Команда delete введена неверно");

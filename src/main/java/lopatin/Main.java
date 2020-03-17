@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Введите команду");
         Scanner scanner = new Scanner(System.in);
         String command;
         Filter filter = new Filter();
+        System.out.println("Введите команду");
         while (true) {
             try {
                 command = scanner.nextLine();

@@ -15,7 +15,7 @@ public class Filter {
     Pattern pattern;
 
     public Filter() {
-        pattern = Pattern.compile("(([Aa]dd|[Pp]rint|[Dd]elete) *[\\d]{0,3} *([\\w]+.txt) *(\"[ \\w\\d]*\")?)|([Ee]xit) *");
+        pattern = Pattern.compile("(([Aa]dd|[Pp]rint|[Dd]elete) *[\\d]{0,3} *([\\w]+.txt) *(\"[ \\w\\d]*\")?)|([Ee]xit)");
         commandType = new HashMap<>();
         handlerType = new HashMap<>();
         commandType.put("add", CommandType.ADD);
@@ -33,7 +33,7 @@ public class Filter {
             System.out.println("Команда распознана");
             Scanner scanner = new Scanner(command);
             scanner.useDelimiter(" ");
-            CommandType type = commandType.get(scanner.next());
+            CommandType type = commandType.get(scanner.next().toLowerCase());
             handlerType.get(type).handle(command);
         } else {
             log.error("Команда не распознана");

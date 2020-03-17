@@ -11,7 +11,7 @@ public class Print implements CommandHandler {
     Pattern pattern;
     @Override
     public void handle(String command) throws InvalidCommandException {
-        pattern = Pattern.compile("^([Pp]rint) *[\\d]{0,3} *([\\w]+[\\w.]*)");
+        pattern = Pattern.compile("[Pp]rint *[\\d]{0,3} *[\\w]+.txt");
         if (!pattern.matcher(command).matches()){
             log.error("Команда print введена неверно");
             throw new InvalidCommandException("Команда print введена неверно");

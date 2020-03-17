@@ -13,7 +13,7 @@ public class Add implements CommandHandler {
     Pattern pattern;
     @Override
     public void handle(String command) throws InvalidCommandException {
-        pattern = Pattern.compile("[Aa]dd [\\d]* [\\w]+.txt \"[ \\w\\d]*\"");
+        pattern = Pattern.compile("[Aa]dd *[\\d]{0,3} [\\w]+.txt *\"[ \\w\\d]*\"");
         if (!pattern.matcher(command).matches()) {
             log.error("Команда add введена неверно");
             throw new InvalidCommandException("Команда add введена неверно");

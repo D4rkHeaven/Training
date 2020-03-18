@@ -17,7 +17,7 @@ import java.io.File;
  * Класс для создания XML по XSD через DOM
  */
 public class DomWriter {
-    public void createXML() {
+    public void createXML(int number) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder;
@@ -25,35 +25,35 @@ public class DomWriter {
             Document document = builder.newDocument();
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
-            StreamResult file = new StreamResult(new File("books.xml"));
-            Element rootElement = document.createElementNS("", "Books");
-
-            rootElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-            rootElement.setAttribute("xsi:noNamespaceSchemaLocation", "book.xsd");
-            Node book1 = rootElement.appendChild(getBook(document));
-
-            Node book2 = rootElement.appendChild(getBook(document));
+            StreamResult file = new StreamResult(new File("book.xml"));
+            createBooks(document, number);
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            document.appendChild(rootElement);
             DOMSource source = new DOMSource(document);
             transformer.transform(source, file);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    private Node getBook(Document document ) {
-
-
-
+    /**
+     * Метод создания документа, заполненного указанным количеством книг
+     * @param document - заполняемый документ
+     * @param number - количество генерируемых книг для документа
+     * @return документ, заполненный указанным количеством книг
+     */
+    private Document createBooks(Document document, int number ) {
+        Element rootElement = document.createElementNS("", "Books");
+        rootElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        rootElement.setAttribute("xsi:noNamespaceSchemaLocation", "book.xsd");
+        document.appendChild(rootElement);
+        for (int i = 0; i < number; i++) {
             Element book = document.createElement("book");
             book.appendChild(getAuthor(document));
-            book.appendChild(getField(document, "pagecount", Integer.toString((int) (Math.random() * 1000))));
-            book.appendChild(getField(document, "namebook", stringGen()));
+            book.appendChild(getField(document, "numberofpages", Integer.toString((int) (Math.random() * 1000))));
+            book.appendChild(getField(document, "name", stringGen()));
             book.appendChild(getField(document, "publisher", stringGen()));
-
-
-        return book;
+            rootElement.appendChild( book);
+        }
+        return document;
     }
     /**
      * Метод создания автора книги

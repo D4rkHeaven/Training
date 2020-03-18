@@ -8,9 +8,11 @@ public class Main {
         DomParser parser = new DomParser();
         StaxParser staxParser = new StaxParser();
         DomWriter domWriter = new DomWriter();
+        XmlValidator xmlValidator= new XmlValidator();
         parser.parseByDom();
         staxParser.parseByStax();
-        domWriter.createXML();
+        domWriter.createXML(5);
+        System.out.println( xmlValidator.validateXml("src/main/resources/book.xsd", "book.xml"));
     }
 }
 

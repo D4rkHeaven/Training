@@ -25,7 +25,6 @@ public class DomParser {
 
             NodeList nList = doc.getElementsByTagName("PLANT");
 
-
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 Node nNode = nList.item(temp);

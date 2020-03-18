@@ -2,6 +2,8 @@ package lopatin;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello epam!");
+        DomParser parser = new DomParser();
+        parser.parseByDom();
     }
 }
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Аппендер с выводом в файл-->
+    <appender name="fileDom" class="ch.qos.logback.core.FileAppender">
+        <file>logs\plant_catalogDOM.xml</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+    <!-- Логгер для файла-->
+    <logger name="lopatin.DomParser" level="info" additivity="false">
+        <appender-ref ref="fileDom"/>
+    </logger>
+
+    <appender name="fileStax" class="ch.qos.logback.core.FileAppender">
+        <file>logs\plant_catalogStax.xml</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+    <!-- Логгер для файла-->
+    <logger name="lopatin.StaxParser" level="info" additivity="false">
+        <appender-ref ref="fileStax"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="fileDom"/>
+    </root>
+</configuration>

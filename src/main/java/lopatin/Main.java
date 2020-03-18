@@ -6,9 +6,11 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
         DomParser parser = new DomParser();
-        parser.parseByDom();
         StaxParser staxParser = new StaxParser();
+        DomWriter domWriter = new DomWriter();
+        parser.parseByDom();
         staxParser.parseByStax();
+        domWriter.createXML();
     }
 }
 

@@ -15,7 +15,7 @@
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="numberofpages" type="xs:int"/>
+                            <xs:element name="numberofpages" type="xs:string"/>
                             <xs:element name="name" type="xs:string"/>
                             <xs:element name="publisher" type="xs:string"/>
                         </xs:sequence>

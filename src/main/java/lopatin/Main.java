@@ -8,11 +8,12 @@ public class Main {
         DomParser parser = new DomParser();
         StaxParser staxParser = new StaxParser();
         DomWriter domWriter = new DomWriter();
-        XmlValidator xmlValidator= new XmlValidator();
+        PlantRedactor plantRedactor = new PlantRedactor();
         parser.parseByDom();
         staxParser.parseByStax();
         domWriter.createXML(5);
-        System.out.println( xmlValidator.validateXml("src/main/resources/book.xsd", "book.xml"));
+        System.out.println( XmlValidator.validateXml("src/main/resources/book.xsd", "book.xml"));
+        plantRedactor.modify("plant_catalog.xml");
     }
 }
 

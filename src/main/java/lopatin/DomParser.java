@@ -13,28 +13,18 @@ import java.io.File;
 public class DomParser {
     public void parseByDom (){
         try {
-
             File fXmlFile = new File("plant_catalog.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
-
-            doc.getDocumentElement().normalize();
-
-            log.info(doc.getDocumentElement().getNodeName());
-
-            NodeList nList = doc.getElementsByTagName("PLANT");
-
+            Document document = dBuilder.parse(fXmlFile);
+            document.getDocumentElement().normalize();
+            log.info(document.getDocumentElement().getNodeName());
+            NodeList nList = document.getElementsByTagName("PLANT");
             for (int temp = 0; temp < nList.getLength(); temp++) {
-
                 Node nNode = nList.item(temp);
-
                 log.info("\n" + nNode.getNodeName());
-
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
                     Element eElement = (Element) nNode;
-
                     log.info("COMMON: " + eElement.getElementsByTagName("COMMON").item(0).getTextContent());
                     log.info("BOTANICAL: " + eElement.getElementsByTagName("BOTANICAL").item(0).getTextContent());
                     log.info("ZONE: " + eElement.getElementsByTagName("ZONE").item(0).getTextContent());

@@ -20,8 +20,7 @@ public class DomWriter {
     public void createXML(int number) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder;
-            builder = factory.newDocumentBuilder();
+            DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.newDocument();
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -70,7 +69,6 @@ public class DomWriter {
         author.appendChild(getField(document, "secondname", stringGen()));
         return author;
     }
-
     /**
      * Метод заполнения поля документа
      * @param document - заполняемый документ
@@ -83,7 +81,6 @@ public class DomWriter {
         node.appendChild(document.createTextNode(value));
         return node;
     }
-
     /**
      * Метод генерации случайной строки
      * @return строку со случайным набором букв

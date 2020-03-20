@@ -3,42 +3,62 @@ package lopatin;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service for working with dto. This is layer between user and repository
+ */
 public class Service {
-
-    // Получение сущности из БД через ДТО
-    public HumanDTO get(HumanDTO dto) {
+    /**
+     * Get one dto from repository (DB)
+     *
+     * @param dto from user
+     * @return filled dto
+     */
+    public HumanDto get(HumanDto dto) {
         Converter converter = new Converter();
         Repository repository = new Repository();
-        Human human= converter.ConvertToHuman(dto);
+        Human human = converter.ConvertToHuman(dto);
         repository.get(human);
-        dto = converter.ConvertToDTO(human);
+        dto = converter.ConvertToDto(human);
         return dto;
     }
 
-    // Получение списка сущностей из БД через DTO
-     public List<HumanDTO> getAll(int i) {
-        List<HumanDTO> list = new ArrayList<>();
+    /**
+     * Get list with i dto from repository
+     *
+     * @param i number of records
+     * @return list of dto
+     */
+    public List<HumanDto> getAll(int i) {
+        List<HumanDto> dtoList = new ArrayList<>();
         for (int j = 0; j < i; j++) {
-            HumanDTO dto = new HumanDTO();
-            list.add(get(dto));
+            HumanDto dto = new HumanDto();
+            dtoList.add(get(dto));
         }
-        return list;
+        return dtoList;
     }
 
-    // Сохранение ДТО в БД путём конвертации в human
-     public void save(HumanDTO dto) {
+    /**
+     * Save dto in DB
+     *
+     * @param dto - dto from user
+     */
+    public void save(HumanDto dto) {
         Converter converter = new Converter();
         Repository repository = new Repository();
-        Human human=converter.ConvertToHuman(dto);
+        Human human = converter.ConvertToHuman(dto);
         repository.save(human);
     }
 
-    // Сохранение всех ДТО в БД
-     public void saveAll(List<HumanDTO> dtos) {
-        for (HumanDTO dto : dtos) {
+    /**
+     * Save dto list in DB
+     *
+     * @param dtoList list of dto
+     */
+    public void saveAll(List<HumanDto> dtoList) {
+        for (HumanDto dto : dtoList) {
             Converter converter = new Converter();
             Repository repository = new Repository();
-            Human human=converter.ConvertToHuman(dto);
+            Human human = converter.ConvertToHuman(dto);
             repository.save(human);
         }
     }

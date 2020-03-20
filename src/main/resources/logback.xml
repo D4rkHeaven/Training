@@ -3,6 +3,7 @@
     <!-- Аппендер с выводом в файл-->
     <appender name="file" class="ch.qos.logback.core.FileAppender">
         <file>logs\lesson7.log</file>
+        <append>false</append>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n

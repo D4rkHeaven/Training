@@ -8,9 +8,11 @@ import lopatin.util.InvalidCommandException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
 @Slf4j
 public class Delete implements CommandHandler {
     Pattern pattern;
+
     @Override
     public void handle(String command) throws InvalidCommandException {
         pattern = Pattern.compile("[Dd]elete *[\\d]{0,3} *[\\w]+.txt");
@@ -26,16 +28,16 @@ public class Delete implements CommandHandler {
             lineToDelete = scanner.nextInt();
         }
         String fileName = scanner.next();
-        List<String> lines = FileParser.parseToLines(fileName);
+        List<String> lineList = FileParser.parseToLines(fileName);
         if (hasLineNumber) {
-            if (lineToDelete > lines.size()) {
+            if (lineToDelete > lineList.size()) {
                 log.error("Введён неправильный номер строки");
                 throw new InvalidCommandException("Введён неправильный номер строки");
             }
-            lines.remove(lineToDelete - 1);
+            lineList.remove(lineToDelete - 1);
         } else {
-            lines.remove(lines.size() - 1);
+            lineList.remove(lineList.size() - 1);
         }
-        FileWrite.writeLines(fileName, lines);
+        FileWrite.writeLines(fileName, lineList);
     }
 }

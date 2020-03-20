@@ -9,15 +9,25 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Parse file to list of strings
+ */
 @Slf4j
 public class FileParser {
+    /**
+     * Parse file to string list
+     *
+     * @param fileName input file
+     * @return list of strings
+     * @throws InvalidCommandException - wrong input command
+     */
     public static List<String> parseToLines(String fileName) throws InvalidCommandException {
         File file = new File(fileName);
-        List<String> lines = new ArrayList<>();
+        List<String> lineList = new ArrayList<>();
         if (file.exists()) {
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
                 while (bufferedReader.ready())
-                    lines.add(bufferedReader.readLine());
+                    lineList.add(bufferedReader.readLine());
             } catch (FileNotFoundException e) {
                 log.error(e.getMessage());
                 System.out.println("Файл не найден");
@@ -28,6 +38,6 @@ public class FileParser {
         } else {
             throw new InvalidCommandException("Файл не найден");
         }
-        return lines;
+        return lineList;
     }
 }

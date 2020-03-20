@@ -9,14 +9,18 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+
+/**
+ * Put content of xml file into log using DOM
+ */
 @Slf4j
 public class DomParser {
-    public void parseByDom (){
+    public void parseByDom() {
         try {
-            File fXmlFile = new File("plant_catalog.xml");
+            File xmlFile = new File("plant_catalog.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document document = dBuilder.parse(fXmlFile);
+            Document document = dBuilder.parse(xmlFile);
             document.getDocumentElement().normalize();
             log.info(document.getDocumentElement().getNodeName());
             NodeList nList = document.getElementsByTagName("PLANT");

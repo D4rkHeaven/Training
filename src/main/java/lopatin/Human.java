@@ -11,6 +11,7 @@ public class Human {
     private String fio;
     private int age;
     private Address address;
+
     @AllArgsConstructor
     @Data
     class Address {
@@ -18,14 +19,15 @@ public class Human {
         private String street;
         private int house;
         private int flat;
-        public int compareTo(Address o) {
-            int diff = city.compareTo(o.city);
-            if(diff == 0){
-                diff = street.compareTo(o.street);
-                if(diff==0){
-                    diff = house - o.house;
-                    if(diff==0){
-                        return flat - o.flat;
+
+        public int compareTo(Address address) {
+            int diff = city.compareTo(address.city);
+            if (diff == 0) {
+                diff = street.compareTo(address.street);
+                if (diff == 0) {
+                    diff = house - address.house;
+                    if (diff == 0) {
+                        return flat - address.flat;
                     }
                     return diff;
                 }

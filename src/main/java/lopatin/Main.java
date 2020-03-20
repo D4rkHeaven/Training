@@ -8,14 +8,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Task task = new Task();
-        List<Human> humanList = task.getList();
-        List<User> users = task.getUsers();
-        HashMap<Integer, String> hashmap = task.getMap();
+        List<Human> humanList = task.getHumanList();
+        List<User> userList = task.getUserList();
+        HashMap<Integer, String> hashMap = task.getHashMap();
         Scanner in = new Scanner(System.in);
         try {
             System.out.print("Введите номер задания (от 1 до 11): ");
-            int number = in.nextInt();
-            switch (number) {
+            int taskNumber = in.nextInt();
+            switch (taskNumber) {
                 case 1:
                     task.fillArrayList(humanList);
                     break;
@@ -35,16 +35,16 @@ public class Main {
                     task.sortByAddress(humanList);
                     break;
                 case 7:
-                    task.createUsers(users);
+                    task.createUsers(userList);
                     break;
                 case 8:
-                    task.greetUsers(users);
+                    task.greetUsers(userList);
                     break;
                 case 9:
-                    task.sortHashMapByKey(hashmap);
+                    task.sortHashMapByKey(hashMap);
                     break;
                 case 10:
-                    task.sortHashMapByValue(hashmap);
+                    task.sortHashMapByValue(hashMap);
                     break;
                 case 11:
                     task.fillLinkedList();

@@ -1,8 +1,7 @@
 package lopatin;
 
 public enum Role {
-        ADMIN,
-        USER,
-        MODERATOR
-
+    ADMIN,
+    USER,
+    MODERATOR
 }

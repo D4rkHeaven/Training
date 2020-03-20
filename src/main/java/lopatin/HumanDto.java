@@ -9,8 +9,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class HumanDTO {
-    private int ID;
+public class HumanDto {
+    private int id;
     private String name;
     private Address address;
     private Date birthDate;

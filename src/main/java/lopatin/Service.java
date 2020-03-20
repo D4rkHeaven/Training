@@ -6,60 +6,82 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service for working with dto. This is layer between user and repository
+ */
 public class Service {
     private static final int HIGHEST_ALLOWED_ID = 100;
     private Converter converter = new Converter();
     private Repository repository = new Repository();
     private Logger fileLogger = LoggerFactory.getLogger(Service.class);
-    // Получение сущности из БД через ДТО
-    public HumanDTO get(HumanDTO dto) {
+
+    /**
+     * Get one dto from repository (DB)
+     *
+     * @param dto from user
+     * @return filled dto
+     */
+    public HumanDto get(HumanDto dto) {
         Human human = converter.ConvertToHuman(dto);
-        try{
+        try {
             repository.get(human);
-            fileLogger.info("Сущность с id = {} получена из БД", dto.getID());
-        }catch(EntityNotFound e){
-            fileLogger.warn("Exception: ",e);
+            fileLogger.info("Сущность с id = {} получена из БД", dto.getId());
+        } catch (EntityNotFound e) {
+            fileLogger.warn("Exception: ", e);
         }
         return converter.ConvertToDTO(human);
     }
 
-    // Получение списка сущностей из БД через DTO
-    public List<HumanDTO> getAll(int i) {
-        List<HumanDTO> list = new ArrayList<>();
+    /**
+     * Get list with i dto from repository
+     *
+     * @param i number of records
+     * @return list of dto
+     */
+    public List<HumanDto> getAll(int i) {
+        List<HumanDto> dtoList = new ArrayList<>();
         try {
-            List<Human> humans = repository.getAll(i);
+            List<Human> humanList = repository.getAll(i);
             for (int j = 0; j < i; j++) {
-                Human human =humans.get(j);
-                HumanDTO dto = converter.ConvertToDTO(human);
-                list.add(dto);
+                Human human = humanList.get(j);
+                HumanDto dto = converter.ConvertToDTO(human);
+                dtoList.add(dto);
             }
-        } catch (EntityNotFound e){
-            fileLogger.warn("Exception: ",e);
+        } catch (EntityNotFound e) {
+            fileLogger.warn("Exception: ", e);
         }
 
-        return list;
+        return dtoList;
     }
 
-    // Сохранение ДТО в БД путём конвертации в human
-    public void save(HumanDTO dto) {
-        Human human=converter.ConvertToHuman(dto);
+    /**
+     * Save dto in DB
+     *
+     * @param dto - dto from user
+     */
+    public void save(HumanDto dto) {
+        Human human = converter.ConvertToHuman(dto);
         try {
             repository.save(human);
-            fileLogger.info("Сущность с id = {} сохранена в БД", dto.getID());
-        } catch (CannotSaveEntity e){
-            fileLogger.warn("Exception: ",e);
+            fileLogger.info("Сущность с id = {} сохранена в БД", dto.getId());
+        } catch (CannotSaveEntity e) {
+            fileLogger.warn("Exception: ", e);
         }
     }
 
-    // Сохранение всех ДТО в БД
-    public void saveAll(List<HumanDTO> dtos) {
-        for (HumanDTO dto : dtos) {
+    /**
+     * Save dto list in DB
+     *
+     * @param dtoList list of dto
+     */
+    public void saveAll(List<HumanDto> dtoList) {
+        for (HumanDto dto : dtoList) {
             try {
                 Human human = converter.ConvertToHuman(dto);
                 repository.save(human);
-            } catch (CannotSaveEntity e){
-             fileLogger.warn("Exception: ",e);
-        }
+            } catch (CannotSaveEntity e) {
+                fileLogger.warn("Exception: ", e);
+            }
         }
     }
 }

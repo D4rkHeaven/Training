@@ -1,8 +1,10 @@
 package lopatin;
 
-/* Непроверяемое исключение */
+/**
+ * Unchecked exception
+ */
 public class CannotSaveEntity extends RuntimeException {
-    public CannotSaveEntity (String message){
+    public CannotSaveEntity(String message) {
         super(message);
     }
 }

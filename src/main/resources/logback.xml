@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Аппендер с выводом в файл-->
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>logs\lesson7.log</file>
+        <append>false</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+    <!-- Логгер для файла-->
+    <logger name="lopatin.task3" level="info" additivity="false">
+        <appender-ref ref="file"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="file"/>
+    </root>
+</configuration>

@@ -1,35 +1,39 @@
 package lopatin;
 
+/**
+ * Converts human to dto and vice versa
+ */
 public class Converter {
-     private Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
-        Human.Address address = new Human().new Address();
-        address.setStreet(dtoAd.getStreet());
-        address.setCity(dtoAd.getCity());
-        return address;
-    }
 
-    private HumanDTO.Address ConvertAddressToDTO(Human.Address ad) {
-        HumanDTO.Address address = new HumanDTO().new Address();
-        address.setStreet(ad.getStreet());
-        address.setCity(ad.getCity());
-        return address;
-    }
-
-    public Human ConvertToHuman(HumanDTO dto) {
+    public Human ConvertToHuman(HumanDto dto) {
         Human human = new Human();
-        human.setID(dto.getID());
+        human.setId(dto.getId());
         human.setName(dto.getName());
         human.setBirthDate(dto.getBirthDate());
         human.setAddress(ConvertAddressToHuman(dto.getAddress()));
         return human;
     }
 
-    public HumanDTO ConvertToDTO(Human human) {
-        HumanDTO dto = new HumanDTO();
-        dto.setID(human.getID());
+    public HumanDto ConvertToDto(Human human) {
+        HumanDto dto = new HumanDto();
+        dto.setId(human.getId());
         dto.setName(human.getName());
         dto.setBirthDate(human.getBirthDate());
-        dto.setAddress(ConvertAddressToDTO(human.getAddress()));
+        dto.setAddress(ConvertAddressToDto(human.getAddress()));
         return dto;
+    }
+
+    private Human.Address ConvertAddressToHuman(HumanDto.Address dtoAddress) {
+        Human.Address address = new Human().new Address();
+        address.setStreet(dtoAddress.getStreet());
+        address.setCity(dtoAddress.getCity());
+        return address;
+    }
+
+    private HumanDto.Address ConvertAddressToDto(Human.Address address) {
+        HumanDto.Address dtoAddress = new HumanDto().new Address();
+        dtoAddress.setStreet(address.getStreet());
+        dtoAddress.setCity(address.getCity());
+        return dtoAddress;
     }
 }

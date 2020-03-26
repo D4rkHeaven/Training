@@ -14,10 +14,10 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 /**
- * Класс для создания XML по XSD через DOM
+ * Create XML following XSD using DOM
  */
 public class DomWriter {
-    public void createXML(int number) {
+    public void createXml(int number) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -33,13 +33,14 @@ public class DomWriter {
             e.printStackTrace();
         }
     }
+
     /**
      * Метод создания документа, заполненного указанным количеством книг
+     *
      * @param document - заполняемый документ
-     * @param number - количество генерируемых книг для документа
-     * @return документ, заполненный указанным количеством книг
+     * @param number   - количество генерируемых книг для документа
      */
-    private Document createBooks(Document document, int number ) {
+    private void createBooks(Document document, int number) {
         Element rootElement = document.createElementNS("", "Books");
         rootElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
         rootElement.setAttribute("xsi:noNamespaceSchemaLocation", "book.xsd");
@@ -50,39 +51,44 @@ public class DomWriter {
             book.appendChild(getField(document, "numberofpages", Integer.toString((int) (Math.random() * 1000))));
             book.appendChild(getField(document, "name", stringGen()));
             book.appendChild(getField(document, "publisher", stringGen()));
-            rootElement.appendChild( book);
+            rootElement.appendChild(book);
         }
-        return document;
     }
+
     /**
      * Метод создания автора книги
+     *
      * @param document - заполняемый документ
-     *  firstname - имя
-     *  lastname - фамилия
-     *  secondname - отчество
+     *                 firstname - имя
+     *                 lastname - фамилия
+     *                 secondname - отчество
      * @return автора c заполненными полями
      */
-    private Node getAuthor(Document document){
+    private Node getAuthor(Document document) {
         Element author = document.createElement("author");
         author.appendChild(getField(document, "firstname", stringGen()));
         author.appendChild(getField(document, "lastname", stringGen()));
         author.appendChild(getField(document, "secondname", stringGen()));
         return author;
     }
+
     /**
      * Метод заполнения поля документа
+     *
      * @param document - заполняемый документ
-     * @param field - поле документа
-     * @param value - значение поля
+     * @param field    - поле документа
+     * @param value    - значение поля
      * @return заполненное поле документа
      */
-    private Node getField(Document document, String field, String value){
+    private Node getField(Document document, String field, String value) {
         Element node = document.createElement(field);
         node.appendChild(document.createTextNode(value));
         return node;
     }
+
     /**
      * Метод генерации случайной строки
+     *
      * @return строку со случайным набором букв
      */
     private String stringGen() {

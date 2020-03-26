@@ -16,6 +16,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Редактор каталога растений
+ */
 public class PlantRedactor {
     public void modify(String filename) {
         try {
@@ -26,9 +29,8 @@ public class PlantRedactor {
             Element rootElement = document.createElementNS("", "CATALOG");
             document.appendChild(rootElement);
             List<Plant> plantList = parseXmlFile(filename);
-            // Убираем все растения со значением zone = 4
             assert plantList != null;
-            for (Plant plant : plantList){
+            for (Plant plant : plantList) {
                 if (!plant.getZone().equals("3")) {
                     rootElement.appendChild(getPlant(document, plant));
                 }
@@ -42,10 +44,12 @@ public class PlantRedactor {
             e.printStackTrace();
         }
     }
+
     /**
      * Метод получения узла через объект растения
+     *
      * @param document - заполняемый документ
-     * @param plant - объект растения
+     * @param plant    - объект растения
      * @return заполненный узел
      */
     private Node getPlant(Document document, Plant plant) {
@@ -58,8 +62,10 @@ public class PlantRedactor {
         node.appendChild(getField(document, "AVAILABILITY", plant.getAvailability()));
         return node;
     }
+
     /**
      * Метод заполнения поля документа
+     *
      * @param document - заполняемый документ
      * @param field    - поле документа
      * @param value    - значение поля
@@ -70,12 +76,14 @@ public class PlantRedactor {
         node.appendChild(document.createTextNode(value));
         return node;
     }
+
     /**
      * Создаёт список растений на основе входного файла
+     *
      * @param file - входной файл
      * @return заполненный список растений
      */
-    private List<Plant> parseXmlFile(String file){
+    private List<Plant> parseXmlFile(String file) {
         try {
             File xmlFile = new File(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -84,18 +92,20 @@ public class PlantRedactor {
             Document document = builder.parse(xmlFile);
             document.getDocumentElement().normalize();
             NodeList nodeList = document.getElementsByTagName("PLANT");
-            List<Plant> plantUseDomList = new ArrayList<>();
+            List<Plant> plantList = new ArrayList<>();
             for (int i = 0; i < nodeList.getLength(); i++) {
-                plantUseDomList.add(getPlant(nodeList.item(i)));
+                plantList.add(getPlant(nodeList.item(i)));
             }
-            return plantUseDomList;
+            return plantList;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
     /**
      * Получение значений из узла
+     *
      * @param node - входной узел
      * @return заполненный объект растения
      */
@@ -112,9 +122,11 @@ public class PlantRedactor {
         }
         return plant;
     }
+
     /**
      * Получение значения элемента по тегу
-     * @param tag - входной тег
+     *
+     * @param tag     - входной тег
      * @param element - входной элемент
      * @return значение элемента по входному тегу
      */

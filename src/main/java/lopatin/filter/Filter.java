@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Command mapper
+ */
 @Slf4j
 public class Filter {
     HashMap<String, CommandType> commandType;
@@ -33,8 +36,8 @@ public class Filter {
             System.out.println("Команда распознана");
             Scanner scanner = new Scanner(command);
             scanner.useDelimiter(" ");
-            CommandType type = commandType.get(scanner.next().toLowerCase());
-            handlerType.get(type).handle(command);
+            CommandType commandType = this.commandType.get(scanner.next().toLowerCase());
+            handlerType.get(commandType).handle(command);
         } else {
             log.error("Команда не распознана");
             throw new InvalidCommandException("Команда не распознана");

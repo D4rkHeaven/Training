@@ -4,8 +4,8 @@ import java.util.List;
 
 public class FilePrint {
     public static void printAll(String fileName) {
-        List<String> lines = FileParser.parseToLines(fileName);
-        for (String line : lines) {
+        List<String> lineList = FileParser.parseToLines(fileName);
+        for (String line : lineList) {
             System.out.println(line);
         }
     }
@@ -14,5 +14,4 @@ public class FilePrint {
         List<String> lines = FileParser.parseToLines(fileName);
         System.out.println(lines.get(line - 1));
     }
-
 }

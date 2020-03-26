@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class Human {
-    private int ID;
+    private int id;
     private String name;
     private Address address;
     private Date birthDate;

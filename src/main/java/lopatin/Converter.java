@@ -3,39 +3,43 @@ package lopatin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Converts human to dto and vice versa
+ */
 public class Converter {
     private Logger consoleLogger = LoggerFactory.getLogger(Converter.class);
-    private Human.Address ConvertAddressToHuman(HumanDTO.Address dtoAd) {
-        Human.Address address = new Human().new Address();
-        address.setStreet(dtoAd.getStreet());
-        address.setCity(dtoAd.getCity());
-        return address;
-    }
 
-    private HumanDTO.Address ConvertAddressToDTO(Human.Address ad) {
-        HumanDTO.Address address = new HumanDTO().new Address();
-        address.setStreet(ad.getStreet());
-        address.setCity(ad.getCity());
-        return address;
-    }
-
-    public Human ConvertToHuman(HumanDTO dto) {
+    public Human ConvertToHuman(HumanDto dto) {
         Human human = new Human();
-        human.setID(dto.getID());
+        human.setId(dto.getId());
         human.setName(dto.getName());
         human.setBirthDate(dto.getBirthDate());
         human.setAddress(ConvertAddressToHuman(dto.getAddress()));
-        consoleLogger.info("DTO с id = {} конвертирована в сущность", dto.getID());
+        consoleLogger.info("DTO с id = {} конвертирована в сущность", dto.getId());
         return human;
     }
 
-    public HumanDTO ConvertToDTO(Human human) {
-        HumanDTO dto = new HumanDTO();
-        dto.setID(human.getID());
+    public HumanDto ConvertToDTO(Human human) {
+        HumanDto dto = new HumanDto();
+        dto.setId(human.getId());
         dto.setName(human.getName());
         dto.setBirthDate(human.getBirthDate());
         dto.setAddress(ConvertAddressToDTO(human.getAddress()));
-        consoleLogger.info("Человек с id = {} конвертирован в dto", human.getID());
+        consoleLogger.info("Человек с id = {} конвертирован в dto", human.getId());
         return dto;
+    }
+
+    private Human.Address ConvertAddressToHuman(HumanDto.Address dtoAddress) {
+        Human.Address address = new Human().new Address();
+        address.setStreet(dtoAddress.getStreet());
+        address.setCity(dtoAddress.getCity());
+        return address;
+    }
+
+    private HumanDto.Address ConvertAddressToDTO(Human.Address address) {
+        HumanDto.Address dtoAddress = new HumanDto().new Address();
+        dtoAddress.setStreet(address.getStreet());
+        dtoAddress.setCity(address.getCity());
+        return dtoAddress;
     }
 }

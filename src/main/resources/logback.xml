@@ -9,7 +9,7 @@
             </Pattern>
         </layout>
     </appender>
-    
+
     <!-- Вывод в файл и на консоль -->
     <appender name="fileAndConsole"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -59,7 +59,7 @@
     <logger name="lopatin.Service" level="info" additivity="false">
         <appender-ref ref="file"/>
     </logger>
-    
+
     <logger name="lopatin.Converter" level="info" additivity="false">
         <appender-ref ref="console"/>
     </logger>

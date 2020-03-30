@@ -1,7 +1,11 @@
 package lopatin;
 
 public class Main {
+    private static final String CLASSPATH = "lopatin.Human";
+
     public static void main(String[] args) {
-        System.out.println("Hello epam!");
+        AnnotationCheck checker = new AnnotationCheck();
+        Class<?> clazz = checker.loadClass(CLASSPATH);
+        checker.checkValueAnnotation(clazz);
     }
 }

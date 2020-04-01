@@ -1,4 +1,4 @@
-package lopatin.mainTask;
+package extraTasks;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,4 +9,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.METHOD})
 public @interface Value {
     String name() default "default name";
+
+    int age() default 0;
+
+    String pathToFile() default "";
 }

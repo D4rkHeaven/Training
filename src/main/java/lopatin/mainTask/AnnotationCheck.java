@@ -1,7 +1,10 @@
-package lopatin;
+package lopatin.mainTask;
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 
+@Slf4j
 public class AnnotationCheck {
     public Class<?> loadClass(String classpath) {
         Class<?> clazz = null;
@@ -9,7 +12,7 @@ public class AnnotationCheck {
             try {
                 clazz = Class.forName(classpath);
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                log.warn(String.valueOf(e));
             }
         }
         return clazz;
@@ -18,42 +21,45 @@ public class AnnotationCheck {
     public void checkValueAnnotation(Class<?> clazz) {
         assert clazz != null;
         if (!clazz.isAnnotationPresent(Entity.class)) {
-            System.out.println("Class doesn't have Entity annotation");
+            log.warn("{} doesn't have Entity annotation", clazz);
             if (checkFields(clazz)) {
                 try {
                     throw new IllegalStateException("Class doesn't have Entity annotation, " +
                             "but has Value annotated fields");
                 } catch (IllegalStateException e) {
-                    System.out.println(e);
+                    log.warn(String.valueOf(e));
                 }
             }
         } else {
-            System.out.println("Class has annotation: " + clazz.getAnnotation(Entity.class));
+            log.info("Class has annotation: {} ", clazz.getAnnotation(Entity.class));
             if (!checkFields(clazz)) {
                 try {
                     throw new NoValueAnnotationException("Class doesn't have Value annotation on all fields");
                 } catch (NoValueAnnotationException e) {
-                    System.out.println(e);
+                    log.warn(String.valueOf(e));
                 }
             }
         }
     }
 
-    public void insertValueInFields() {
-        //-------------------------------------
-        Human human = new Human();
+    public void insertValueInFields(Class<?> clazz) {
+
         Field annotatedField = null;
+        Value annotation = null;
         try {
-            annotatedField = human.getClass().getDeclaredField("name");
+            annotatedField = clazz.getDeclaredField("name");
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            log.warn(String.valueOf(e));
         }
-        assert annotatedField != null;
-        Value annotation = annotatedField.getAnnotation(Value.class);
+        try {
+            assert annotatedField != null;
+            annotation = annotatedField.getAnnotation(Value.class);
+        } catch (NullPointerException e) {
+            log.warn(String.valueOf(e));
+        }
         if (annotation != null) {
-            System.out.println("Value of annotated field: " + annotation.name());
+            log.info("Human name: {} ", annotation.name());
         }
-        System.out.println(human.getName());
     }
 
     private boolean checkFields(Class<?> clazz) {

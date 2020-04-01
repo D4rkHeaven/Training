@@ -1,4 +1,4 @@
-package lopatin;
+package lopatin.mainTask;
 
 @Entity
 public class Human {

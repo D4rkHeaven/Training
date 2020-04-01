@@ -102,7 +102,6 @@ public class FileHandler {
 
     /**
      * Generate human with values from source file
-     *
      */
     public void setHumanValues() {
         Human human = new Human();

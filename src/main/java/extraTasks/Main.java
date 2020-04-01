@@ -1,8 +1,5 @@
 package extraTasks;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class Main {
     private static final String PATH = "src/main/resources/humanValues.txt";
 

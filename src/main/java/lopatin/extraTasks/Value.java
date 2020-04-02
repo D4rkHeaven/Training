@@ -1,4 +1,4 @@
-package extraTasks;
+package lopatin.extraTasks;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

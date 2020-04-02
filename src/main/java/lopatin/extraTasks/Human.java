@@ -1,4 +1,4 @@
-package extraTasks;
+package lopatin.extraTasks;
 
 import lopatin.mainTask.Entity;
 

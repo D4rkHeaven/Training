@@ -1,4 +1,4 @@
-package extraTasks;
+package lopatin.extraTasks;
 
 import lombok.extern.slf4j.Slf4j;
 import lopatin.mainTask.Entity;
@@ -75,7 +75,7 @@ public class FileHandler {
                         try {
                             age = Integer.parseInt(params[1]);
                         } catch (NumberFormatException e) {
-                            log.info("Invalid age in file - " + e.getMessage());
+                            log.warn("Invalid age in file - " + e.getMessage());
                         }
                     } else {
                         continue;
@@ -87,14 +87,14 @@ public class FileHandler {
                             humanInstance.setName(name);
                             humanList.add(humanInstance);
                         } catch (InstantiationException | IllegalAccessException e) {
-                            log.info(e.getMessage());
+                            log.warn(e.getMessage());
                         }
                         name = "";
                         age = 0;
                     }
                 }
             } catch (FileNotFoundException e) {
-                log.info(e.getMessage());
+                log.warn(e.getMessage());
             }
         }
         log.info("Generated people with values from file: {}", humanList.toString());
@@ -129,7 +129,7 @@ public class FileHandler {
                                     try {
                                         annotationAge = Integer.parseInt(params[1]);
                                     } catch (NumberFormatException e) {
-                                        log.info("Invalid age format in source file " + e.getMessage());
+                                        log.warn("Invalid age format in source file " + e.getMessage());
                                     }
                                 }
                             }
@@ -173,13 +173,17 @@ public class FileHandler {
      */
     private void extractFiles(File folder) {
         File[] folderEntries = folder.listFiles();
-        assert folderEntries != null;
-        for (File entry : folderEntries) {
-            if (entry.isDirectory()) {
-                extractFiles(entry);
-                continue;
+        try {
+            assert folderEntries != null;
+            for (File entry : folderEntries) {
+                if (entry.isDirectory()) {
+                    extractFiles(entry);
+                    continue;
+                }
+                names.add(entry);
             }
-            names.add(entry);
+        }catch (NullPointerException e){
+            log.warn("Path doesn't exist or contains non-latin letters");
         }
     }
 }

@@ -1,4 +1,4 @@
-package extraTasks;
+package lopatin.extraTasks;
 
 public class Main {
     private static final String PATH = "src/main/resources/humanValues.txt";

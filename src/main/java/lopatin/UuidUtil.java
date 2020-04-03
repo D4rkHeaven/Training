@@ -28,11 +28,11 @@ public class UuidUtil {
     /**
      * Converts UUID list to String list and writes it to file
      *
-     * @param filePath path to file
+     * @param filePath to file with UUID
      * @param uuidList UUID list
      */
     public void fileWrite(String filePath, List<UUID> uuidList) {
-        filePath = Optional.ofNullable(filePath).orElseGet(String::new);
+        filePath = Optional.ofNullable(filePath).orElse("");
         List<String> stringList = uuidList.stream()
                 .filter(Objects::nonNull)
                 .map(UUID::toString)
@@ -51,7 +51,7 @@ public class UuidUtil {
      * @param filePath path to file
      */
     public void uuidCounter(String filePath) {
-        filePath = Optional.ofNullable(filePath).orElseGet(String::new);
+        filePath = Optional.ofNullable(filePath).orElse("");
         try {
             long count = Files.lines(Paths.get(filePath))
                     .filter(Objects::nonNull)

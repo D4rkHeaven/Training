@@ -13,13 +13,27 @@ import java.util.stream.Stream;
 
 @Slf4j
 public class UuidUtil {
+    /**
+     * Generates UUID list
+     *
+     * @return list of UUID
+     */
     public List<UUID> generate() {
         return Stream.generate(UUID::randomUUID)
                 .limit(10000)
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Converts UUID list to String list and writes it to file
+     *
+     * @param filePath path to file
+     * @param uuidList UUID list
+     */
     public void fileWrite(String filePath, List<UUID> uuidList) {
+        if (filePath == null) {
+            filePath = "";
+        }
         List<String> stringList = uuidList.stream()
                 .filter(Objects::nonNull)
                 .map(UUID::toString)
@@ -32,7 +46,15 @@ public class UuidUtil {
         }
     }
 
+    /**
+     * Counts number of UUID in file with value > 100
+     *
+     * @param filePath path to file
+     */
     public void uuidCounter(String filePath) {
+        if (filePath == null) {
+            filePath = "";
+        }
         try {
             long count = Files.lines(Paths.get(filePath))
                     .filter(Objects::nonNull)

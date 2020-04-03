@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,9 +32,7 @@ public class UuidUtil {
      * @param uuidList UUID list
      */
     public void fileWrite(String filePath, List<UUID> uuidList) {
-        if (filePath == null) {
-            filePath = "";
-        }
+        filePath = Optional.ofNullable(filePath).orElseGet(String::new);
         List<String> stringList = uuidList.stream()
                 .filter(Objects::nonNull)
                 .map(UUID::toString)
@@ -52,9 +51,7 @@ public class UuidUtil {
      * @param filePath path to file
      */
     public void uuidCounter(String filePath) {
-        if (filePath == null) {
-            filePath = "";
-        }
+        filePath = Optional.ofNullable(filePath).orElseGet(String::new);
         try {
             long count = Files.lines(Paths.get(filePath))
                     .filter(Objects::nonNull)

@@ -20,10 +20,9 @@ public class SausageUtil {
      */
     public void fileRead(String filePath) {
         filePath = Optional.ofNullable(filePath).orElseGet(String::new);
-        Base64.Decoder decoder = Base64.getDecoder();
         try {
             List<Sausage> sausages = Files.lines(Paths.get(filePath))
-                    .map(decoder::decode)
+                    .map(Base64.getDecoder()::decode)
                     .map(String::new)
                     .map(line -> Arrays.stream(line.split(","))
                             .map(elem -> elem.split("=")[1]).collect(Collectors.toList()))

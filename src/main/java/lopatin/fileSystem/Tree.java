@@ -9,8 +9,8 @@ import java.util.Collection;
 @Slf4j
 public class Tree {
     private static Collection<String> names = new ArrayList<>();
-    Node root;
-    Node commonRoot;
+    private Node root;
+    private Node commonRoot;
 
     public Tree(Node root) {
         this.root = root;

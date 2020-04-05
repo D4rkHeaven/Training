@@ -9,8 +9,7 @@ public class Main {
         Doomsday doomsday = new Doomsday();
         SausageUtil sausageUtil = new SausageUtil();
         uuidUtil.fileWrite(UUIDPATH, uuidUtil.generate());
-        uuidUtil.uuidCounter(UUIDPATH);
-        doomsday.generate(90);
+        doomsday.generate(uuidUtil.uuidCounter(UUIDPATH));
         sausageUtil.fileRead(SAUSAGEPATH);
     }
 }

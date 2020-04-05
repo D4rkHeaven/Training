@@ -15,9 +15,11 @@ public class Doomsday {
      *
      * @param startDate initial value for N and M count
      */
-    public void generate(Integer startDate) {
+    public void generate(Long startDate) {
         try {
-            String stringDate = Optional.ofNullable(String.format("%04d", startDate)).orElse(String.format("%04d",0));
+            String stringDate = Optional
+                    .ofNullable(String.format("%04d", startDate))
+                    .orElse(String.format("%04d", 0));
             int n = Integer.parseInt(stringDate.substring(0, 2).replaceAll("\\D", ""));
             int m = Integer.parseInt(stringDate.substring(2, 4).replaceAll("\\D", ""));
             ZonedDateTime doomsdayDate = ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusMonths(n).plusDays(m);

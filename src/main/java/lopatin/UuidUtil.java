@@ -32,7 +32,9 @@ public class UuidUtil {
      * @param uuidList UUID list
      */
     public void fileWrite(String filePath, List<UUID> uuidList) {
-        filePath = Optional.ofNullable(filePath).orElse("");
+        filePath = Optional
+                .ofNullable(filePath)
+                .orElse("");
         List<String> stringList = uuidList.stream()
                 .filter(Objects::nonNull)
                 .map(UUID::toString)
@@ -49,9 +51,12 @@ public class UuidUtil {
      * Counts number of UUID in file with value > 100
      *
      * @param filePath path to file
+     * @return number of UUID in file with value > 100
      */
-    public void uuidCounter(String filePath) {
-        filePath = Optional.ofNullable(filePath).orElse("");
+    public long uuidCounter(String filePath) {
+        filePath = Optional
+                .ofNullable(filePath)
+                .orElse("");
         try {
             long count = Files.lines(Paths.get(filePath))
                     .filter(Objects::nonNull)
@@ -60,8 +65,10 @@ public class UuidUtil {
                     .filter(sum -> sum > 100)
                     .count();
             log.info("Number of UUID > 100: {}", count);
+            return count;
         } catch (IOException e) {
             log.error("File write error ", e);
         }
+        return 0;
     }
 }

@@ -19,7 +19,9 @@ public class SausageUtil {
      * @param filePath to file with encoded sausages
      */
     public void fileRead(String filePath) {
-        filePath = Optional.ofNullable(filePath).orElseGet(String::new);
+        filePath = Optional
+                .ofNullable(filePath)
+                .orElseGet(String::new);
         try {
             List<Sausage> sausages = Files.lines(Paths.get(filePath))
                     .map(Base64.getDecoder()::decode)

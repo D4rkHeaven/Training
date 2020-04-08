@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 public class Problem {
 
     public static void main(String[] args) {
-        final Increment a = new Increment();
-        final Increment b = new Increment();
+        final Incrementor a = new Incrementor();
+        final Incrementor b = new Incrementor();
         Runnable block1 = () -> {
             synchronized (a) {
                 try {
@@ -16,18 +16,18 @@ public class Problem {
                     log.error("Thread error", e);
                 }
                 synchronized (b) {
-                    log.info("Initial value i = {}", a.getI());
-                    a.incI();
-                    log.info("i incremented  {}", a.getI());
+                    log.info("Initial value = {}", a.getValue());
+                    a.incrementValue();
+                    log.info("value incremented  {}", a.getValue());
                 }
             }
         };
 
         Runnable block2 = () -> {
             synchronized (b) {
-                a.incI();
+                a.incrementValue();
                 synchronized (a) {
-                    log.info("i incremented  {}", a.getI());
+                    log.info("value incremented  {}", a.getValue());
                 }
             }
         };

@@ -15,44 +15,35 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Service {
+    private static final int WRITER_NUMBER = 4;
+    private static final int READER_NUMBER = 2;
+    private static final int UPDATER_NUMBER = 2;
     private Chat chat;
-    private AtomicInteger atomicInteger;
-    //Количество Writer
-    private static final int WRITER_COUNT = 3;
-    //Количество Reader
-    private static final int READER_COUNT = 3;
-    //Количество Updater
-    private static final int UPDATER_COUNT = 1;
+    private AtomicInteger messageCounter;
 
     public Service() {
         chat = new Chat();
-        atomicInteger = new AtomicInteger(0);
+        messageCounter = new AtomicInteger(0);
     }
 
     public void startChat() {
-        Task writerTask = new Write(chat, atomicInteger);
+        Task writerTask = new Write(chat, messageCounter);
         Task readerTask = new Read(chat);
         Task updaterTask = new Update(chat);
-
         TaskHandler writerTaskExecutor = new WriteHandler(writerTask, 20, 60);
         TaskHandler readerTaskExecutor = new ReadHandler(readerTask, 30, 50);
         TaskHandler updaterTaskExecutor = new UpdateHandler(updaterTask, 40);
-
-
         ExecutorService executorService = Executors.newFixedThreadPool(8);
 
-        //Передаем задачи в executerService
-        for (int i = 0; i < WRITER_COUNT; i++) {
+        for (int i = 0; i < WRITER_NUMBER; i++) {
             executorService.execute(writerTaskExecutor);
         }
-
-        for (int i = 0; i < READER_COUNT; i++) {
+        for (int i = 0; i < READER_NUMBER; i++) {
             executorService.execute(readerTaskExecutor);
         }
-        for (int i = 0; i < UPDATER_COUNT; i++) {
+        for (int i = 0; i < UPDATER_NUMBER; i++) {
             executorService.execute(updaterTaskExecutor);
         }
         executorService.shutdown();
-
     }
 }

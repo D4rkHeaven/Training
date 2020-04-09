@@ -8,8 +8,7 @@ public class Read extends Task {
     }
 
     @Override
-    public String call() throws Exception {
+    public String call() {
         return chat.readSms();
     }
-
 }

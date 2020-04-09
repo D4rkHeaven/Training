@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
 @Slf4j
 public class Chat {
-
+    private static final int CAPACITY = 25;
     private List<Sms> chatSmsList = Collections.synchronizedList(new ArrayList<>());
     private List<Sms> bufferSmsList = Collections.synchronizedList(new ArrayList<>());
-    private static final int CAPACITY = 25;
     private Lock lock = new ReentrantLock();
 
     public String addSMS(String text) {
@@ -23,10 +23,10 @@ public class Chat {
         try {
             if (chatSmsList.size() < CAPACITY) {
                 chatSmsList.add(new Sms(text));
-                log.info("Добавлено сообщение в чат {}", text);
+                log.info("New message added: {}", text);
             } else {
                 bufferSmsList.add(new Sms(text));
-                log.info("Добавлено сообщение в буфер {}", text);
+                log.info("New message added to buffer: {}", text);
             }
         } finally {
             lock.unlock();
@@ -34,40 +34,37 @@ public class Chat {
         return text;
     }
 
-    public String readSms() throws InterruptedException {
+    public String readSms() {
         lock.lock();
         try {
             if (!chatSmsList.isEmpty()) {
                 Sms sms = chatSmsList.remove(0);
                 if (!bufferSmsList.isEmpty()) {
                     chatSmsList.add(bufferSmsList.remove(0));
+                    log.info("Messages left in buffer: {}", bufferSmsList.size());
                 }
-                log.info("Размер чата: {}", chatSmsList.size());
-                log.info("Размер буфера: {}", bufferSmsList.size());
-                log.info("Прочитанно сообщение {}", sms.getText());
+                log.info("Messages left in chat: {}", chatSmsList.size());
+                log.info("Read message: {}", sms.getText());
                 return sms.getText();
             }
         } finally {
             lock.unlock();
         }
-        throw new InterruptedException("Не удалось считать смс, чат пуст");
+        throw new EmptyChatException("Can't read the message because message list is empty");
     }
 
     public String updateSms() {
         lock.lock();
         try {
-
             if (!chatSmsList.isEmpty()) {
-                int randomIndex = ThreadLocalRandom.current().nextInt(chatSmsList.size());
-                Sms sms = chatSmsList.get(randomIndex);
-                sms.setText(sms.getText() + " modified");
-                log.info("Измененно сообщение {}", sms.getText());
+                Sms sms = chatSmsList.get(ThreadLocalRandom.current().nextInt(chatSmsList.size()));
+                sms.setText(sms.getText() + " updated");
+                log.info("Updated message: {}", sms.getText());
                 return sms.getText();
             }
         } finally {
             lock.unlock();
         }
-        throw new EmptyChatException("Изменение сообщения не удалось, список сообщений пуст");
-
+        throw new EmptyChatException("Can't update the message because message list is empty");
     }
 }

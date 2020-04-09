@@ -3,7 +3,6 @@ package lopatin.chat.handler;
 import lombok.extern.slf4j.Slf4j;
 import lopatin.chat.task.Task;
 
-import java.util.Random;
 @Slf4j
 public class UpdateHandler extends TaskHandler {
     public UpdateHandler(Task task, int period) {
@@ -11,14 +10,14 @@ public class UpdateHandler extends TaskHandler {
     }
 
     @Override
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
-        Random rnd = new Random();
         while (true) {
             try {
-                String modifiedSmsText = executeTask(period);
-                log.info("Изменение Updater : {}", modifiedSmsText);
+                log.info("Updater with name {} update the message: {}",
+                        Thread.currentThread().getName(), executeTask(period));
             } catch (Exception e) {
-                log.error(e.getMessage());
+                log.warn("{}", e.getMessage());
             }
         }
     }

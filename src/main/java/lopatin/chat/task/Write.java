@@ -5,16 +5,16 @@ import lopatin.chat.chat.Chat;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Write extends Task {
-    private AtomicInteger atomicInteger;
+    private AtomicInteger messageCounter;
 
-    public Write(Chat chat, AtomicInteger atomicInteger) {
+    public Write(Chat chat, AtomicInteger messageCounter) {
         super(chat);
-        this.atomicInteger = atomicInteger;
+        this.messageCounter = messageCounter;
     }
 
     @Override
     public String call() {
-        String text = "сообщение №" + atomicInteger.incrementAndGet();
+        String text = "Message №" + messageCounter.incrementAndGet();
         return chat.addSMS(text);
     }
 }

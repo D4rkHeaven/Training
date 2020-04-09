@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import lopatin.chat.task.Task;
 
 import java.util.Random;
+
 @Slf4j
 public class WriteHandler extends TaskHandler {
     public WriteHandler(Task task, int secFrom, int secTo) {
@@ -11,15 +12,14 @@ public class WriteHandler extends TaskHandler {
     }
 
     @Override
+    @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
-        Random rnd = new Random();
         while (true) {
-            int time = rnd.nextInt(secTo - secFrom) + secFrom;
             try {
-                String writedSmsText = executeTask(time);
-                log.info("Запись Writer :" + Thread.currentThread().getName() + ": Записано: " + writedSmsText);
+                log.info("Writer with name {} write the message: {}", Thread.currentThread().getName(),
+                        executeTask(new Random().nextInt(secTo - secFrom) + secFrom));
             } catch (Exception e) {
-                log.error(e.getMessage());
+                log.warn("{}", e.getMessage());
             }
         }
     }
